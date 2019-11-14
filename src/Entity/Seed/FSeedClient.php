@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FSeedClient
  *
  * @ORM\Table(name="f_seed_client", uniqueConstraints={@ORM\UniqueConstraint(name="ALIAS", columns={"ALIAS"}), @ORM\UniqueConstraint(name="NOM", columns={"NOM"})}, indexes={@ORM\Index(name="WDIDX_F_SEED_CLIENT_ID_PAYEUR", columns={"ID_PAYEUR"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\Seed\FSeedClientRepository")
  */
 class FSeedClient
 {
