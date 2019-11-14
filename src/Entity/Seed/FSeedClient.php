@@ -15,7 +15,7 @@ class FSeedClient
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_CLIENT", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_CLIENT", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -52,7 +52,7 @@ class FSeedClient
      */
     private $idPayeur;
 
-    public function getIdClient(): ?string
+    public function getIdClient(): ?int
     {
         return $this->idClient;
     }

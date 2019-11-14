@@ -15,7 +15,7 @@ class FSeedRole
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_ROLE", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_ROLE", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -31,7 +31,7 @@ class FSeedRole
     /**
      * @var int|null
      *
-     * @ORM\Column(name="ID_MODULE", type="bigint", nullable=true)
+     * @ORM\Column(name="ID_MODULE", type="integer", nullable=true)
      */
     private $idModule;
 
@@ -45,11 +45,11 @@ class FSeedRole
     /**
      * @var int|null
      *
-     * @ORM\Column(name="ID_CLIENT", type="bigint", nullable=true)
+     * @ORM\Column(name="ID_CLIENT", type="integer", nullable=true)
      */
     private $idClient = '0';
 
-    public function getIdRole(): ?string
+    public function getIdRole(): ?int
     {
         return $this->idRole;
     }
@@ -66,12 +66,12 @@ class FSeedRole
         return $this;
     }
 
-    public function getIdModule(): ?string
+    public function getIdModule(): ?int
     {
         return $this->idModule;
     }
 
-    public function setIdModule(?string $idModule): self
+    public function setIdModule(?int $idModule): self
     {
         $this->idModule = $idModule;
 
@@ -90,12 +90,12 @@ class FSeedRole
         return $this;
     }
 
-    public function getIdClient(): ?string
+    public function getIdClient(): ?int
     {
         return $this->idClient;
     }
 
-    public function setIdClient(?string $idClient): self
+    public function setIdClient(?int $idClient): self
     {
         $this->idClient = $idClient;
 

@@ -15,7 +15,7 @@ class FSeedModule
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_MODULE", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_MODULE", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -35,7 +35,7 @@ class FSeedModule
      */
     private $version;
 
-    public function getIdModule(): ?string
+    public function getIdModule(): ?int
     {
         return $this->idModule;
     }

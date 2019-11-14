@@ -15,7 +15,7 @@ class FSeedDroit
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_DROIT", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_DROIT", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,7 +24,7 @@ class FSeedDroit
     /**
      * @var int|null
      *
-     * @ORM\Column(name="ID_MODULE", type="bigint", nullable=true)
+     * @ORM\Column(name="ID_MODULE", type="integer", nullable=true)
      */
     private $idModule;
 
@@ -42,17 +42,17 @@ class FSeedDroit
      */
     private $description;
 
-    public function getIdDroit(): ?string
+    public function getIdDroit(): ?int
     {
         return $this->idDroit;
     }
 
-    public function getIdModule(): ?string
+    public function getIdModule(): ?int
     {
         return $this->idModule;
     }
 
-    public function setIdModule(?string $idModule): self
+    public function setIdModule(?int $idModule): self
     {
         $this->idModule = $idModule;
 

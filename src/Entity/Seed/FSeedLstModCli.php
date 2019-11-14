@@ -15,7 +15,7 @@ class FSeedLstModCli
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_lst_mod_cli", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_lst_mod_cli", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,40 +24,40 @@ class FSeedLstModCli
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_MODULE", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_MODULE", type="integer", nullable=false)
      */
-    private $idModule = '0';
+    private $idModule;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_CLIENT", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_CLIENT", type="integer", nullable=false)
      */
-    private $idClient = '0';
+    private $idClient;
 
-    public function getIdLstModCli(): ?string
+    public function getIdLstModCli(): ?int
     {
         return $this->idLstModCli;
     }
 
-    public function getIdModule(): ?string
+    public function getIdModule(): ?int
     {
         return $this->idModule;
     }
 
-    public function setIdModule(string $idModule): self
+    public function setIdModule(int $idModule): self
     {
         $this->idModule = $idModule;
 
         return $this;
     }
 
-    public function getIdClient(): ?string
+    public function getIdClient(): ?int
     {
         return $this->idClient;
     }
 
-    public function setIdClient(string $idClient): self
+    public function setIdClient(int $idClient): self
     {
         $this->idClient = $idClient;
 

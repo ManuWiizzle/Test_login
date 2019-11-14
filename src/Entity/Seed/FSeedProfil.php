@@ -15,7 +15,7 @@ class FSeedProfil
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_PROFIL", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_PROFIL", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,7 +24,7 @@ class FSeedProfil
     /**
      * @var int|null
      *
-     * @ORM\Column(name="ID_CLIENT", type="bigint", nullable=true)
+     * @ORM\Column(name="ID_CLIENT", type="integer", nullable=true)
      */
     private $idClient = '0';
 
@@ -42,17 +42,17 @@ class FSeedProfil
      */
     private $estDefaut = '0';
 
-    public function getIdProfil(): ?string
+    public function getIdProfil(): ?int
     {
         return $this->idProfil;
     }
 
-    public function getIdClient(): ?string
+    public function getIdClient(): ?int
     {
         return $this->idClient;
     }
 
-    public function setIdClient(?string $idClient): self
+    public function setIdClient(?int $idClient): self
     {
         $this->idClient = $idClient;
 

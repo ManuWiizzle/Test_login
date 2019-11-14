@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FSeedLstModPro
  *
- * @ORM\Table(name="f_seed_lst_mod_pro", indexes={@ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_ID_PROFIL", columns={"ID_PROFIL"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_CLE_CLI_PRO_MOD", columns={"ID_CLIENT", "ID_PROFIL", "ID_MODULE"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_ID_MODULE", columns={"ID_MODULE"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_ID_CLIENT", columns={"ID_CLIENT"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_CLE_CLI_MOD", columns={"ID_CLIENT", "ID_MODULE"})})
+ * @ORM\Table(name="f_seed_lst_mod_pro", indexes={@ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_ID_PROFIL", columns={"ID_PROFIL"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_CLE_CLI_PRO_MOD", columns={"ID_CLIENT", "ID_PROFIL", "ID_MODULE"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_CLE_CLI_MOD", columns={"ID_CLIENT", "ID_MODULE"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_ID_MODULE", columns={"ID_MODULE"}), @ORM\Index(name="WDIDX_F_SEED_LST_MOD_PRO_ID_CLIENT", columns={"ID_CLIENT"})})
  * @ORM\Entity
  */
 class FSeedLstModPro
@@ -15,7 +15,7 @@ class FSeedLstModPro
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_lst_mod_pro", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_lst_mod_pro", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,59 +24,59 @@ class FSeedLstModPro
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_MODULE", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_MODULE", type="integer", nullable=false)
      */
-    private $idModule = '0';
+    private $idModule;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_PROFIL", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_PROFIL", type="integer", nullable=false)
      */
-    private $idProfil = '0';
+    private $idProfil;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_CLIENT", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_CLIENT", type="integer", nullable=false)
      */
-    private $idClient = '0';
+    private $idClient;
 
-    public function getIdLstModPro(): ?string
+    public function getIdLstModPro(): ?int
     {
         return $this->idLstModPro;
     }
 
-    public function getIdModule(): ?string
+    public function getIdModule(): ?int
     {
         return $this->idModule;
     }
 
-    public function setIdModule(string $idModule): self
+    public function setIdModule(int $idModule): self
     {
         $this->idModule = $idModule;
 
         return $this;
     }
 
-    public function getIdProfil(): ?string
+    public function getIdProfil(): ?int
     {
         return $this->idProfil;
     }
 
-    public function setIdProfil(string $idProfil): self
+    public function setIdProfil(int $idProfil): self
     {
         $this->idProfil = $idProfil;
 
         return $this;
     }
 
-    public function getIdClient(): ?string
+    public function getIdClient(): ?int
     {
         return $this->idClient;
     }
 
-    public function setIdClient(string $idClient): self
+    public function setIdClient(int $idClient): self
     {
         $this->idClient = $idClient;
 

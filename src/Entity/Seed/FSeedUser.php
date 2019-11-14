@@ -15,9 +15,9 @@ class FSeedUser
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_PROFIL", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_PROFIL", type="integer", nullable=false)
      */
-    private $idProfil = '0';
+    private $idProfil;
 
     /**
      * @var string
@@ -52,16 +52,16 @@ class FSeedUser
      *
      * @ORM\Column(name="EST_ADMIN", type="boolean", nullable=false)
      */
-    private $estAdmin = '0';
+    private $estAdmin;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_USER", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_USER", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idUser = '0';
+    private $idUser;
 
     /**
      * @var string
@@ -75,7 +75,7 @@ class FSeedUser
      *
      * @ORM\Column(name="EST_SUPER", type="boolean", nullable=false)
      */
-    private $estSuper = '0';
+    private $estSuper;
 
     /**
      * @var string
@@ -89,7 +89,7 @@ class FSeedUser
      *
      * @ORM\Column(name="EST_ACTIVE", type="boolean", nullable=false)
      */
-    private $estActive = '0';
+    private $estActive;
 
     /**
      * @var string
@@ -98,12 +98,12 @@ class FSeedUser
      */
     private $mdpServeur;
 
-    public function getIdProfil(): ?string
+    public function getIdProfil(): ?int
     {
         return $this->idProfil;
     }
 
-    public function setIdProfil(string $idProfil): self
+    public function setIdProfil(int $idProfil): self
     {
         $this->idProfil = $idProfil;
 
@@ -170,7 +170,7 @@ class FSeedUser
         return $this;
     }
 
-    public function getIdUser(): ?string
+    public function getIdUser(): ?int
     {
         return $this->idUser;
     }

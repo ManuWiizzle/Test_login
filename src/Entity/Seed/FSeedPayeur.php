@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class FSeedPayeur
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="ID_PAYEUR", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idPayeur;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="SIRET", type="string", length=14, nullable=true)
@@ -26,17 +35,10 @@ class FSeedPayeur
      */
     private $nom;
 
-    /**
-     * @var \FSeedClient
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="FSeedClient")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_PAYEUR", referencedColumnName="ID_PAYEUR")
-     * })
-     */
-    private $idPayeur;
+    public function getIdPayeur(): ?int
+    {
+        return $this->idPayeur;
+    }
 
     public function getSiret(): ?string
     {
@@ -58,18 +60,6 @@ class FSeedPayeur
     public function setNom(?string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getIdPayeur(): ?FSeedClient
-    {
-        return $this->idPayeur;
-    }
-
-    public function setIdPayeur(?FSeedClient $idPayeur): self
-    {
-        $this->idPayeur = $idPayeur;
 
         return $this;
     }
