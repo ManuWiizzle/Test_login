@@ -2,25 +2,25 @@
 
 namespace App\Repository\Seed;
 
-use App\Entity\Seed\FSeedClient;
+use App\Entity\Seed\FSeedLstModCli;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method FSeedClient|null find($id, $lockMode = null, $lockVersion = null)
- * @method FSeedClient|null findOneBy(array $criteria, array $orderBy = null)
- * @method FSeedClient[]    findAll()
- * @method FSeedClient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method FSeedLstModCli|null find($id, $lockMode = null, $lockVersion = null)
+ * @method FSeedLstModCli|null findOneBy(array $criteria, array $orderBy = null)
+ * @method FSeedLstModCli[]    findAll()
+ * @method FSeedLstModCli[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FSeedClientRepository extends ServiceEntityRepository
+class FSeedLstModCliRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, FSeedClient::class);
+        parent::__construct($registry, FSeedLstModCli::class);
     }
 
     // /**
-    //  * @return FSeedClient[] Returns an array of FSeedClient objects
+    //  * @return FSeedLstModCli[] Returns an array of FSeedLstModCli objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class FSeedClientRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?FSeedClient
+    public function findOneBySomeField($value): ?FSeedLstModCli
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')

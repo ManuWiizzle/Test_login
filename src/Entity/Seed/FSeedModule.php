@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FSeedModule
  *
  * @ORM\Table(name="f_seed_module", indexes={@ORM\Index(name="WDIDX_F_SEED_MODULE_CLE_NOM_VERSION", columns={"NOM", "VERSION"}), @ORM\Index(name="WDIDX_F_SEED_MODULE_NOM", columns={"NOM"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\Seed\FSeedModuleRepository")
  */
 class FSeedModule
 {

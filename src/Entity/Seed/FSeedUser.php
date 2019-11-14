@@ -3,21 +3,24 @@
 namespace App\Entity\Seed;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+
 
 /**
  * FSeedUser
  *
  * @ORM\Table(name="f_seed_user", uniqueConstraints={@ORM\UniqueConstraint(name="LOGIN", columns={"LOGIN"})}, indexes={@ORM\Index(name="WDIDX_F_SEED_USER_ID_PROFIL", columns={"ID_PROFIL"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\Seed\FSeedUserRepository")
  */
-class FSeedUser
+class FSeedUser implements UserInterface
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_PROFIL", type="integer", nullable=false)
+     * @ORM\Column(name="ID_PROFIL", type="bigint", nullable=false)
      */
-    private $idProfil;
+    private $idProfil = '0';
 
     /**
      * @var string
@@ -52,12 +55,12 @@ class FSeedUser
      *
      * @ORM\Column(name="EST_ADMIN", type="boolean", nullable=false)
      */
-    private $estAdmin;
+    private $estAdmin = '0';
 
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_USER", type="integer", nullable=false)
+     * @ORM\Column(name="ID_USER", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -75,7 +78,7 @@ class FSeedUser
      *
      * @ORM\Column(name="EST_SUPER", type="boolean", nullable=false)
      */
-    private $estSuper;
+    private $estSuper = '0';
 
     /**
      * @var string
@@ -89,7 +92,7 @@ class FSeedUser
      *
      * @ORM\Column(name="EST_ACTIVE", type="boolean", nullable=false)
      */
-    private $estActive;
+    private $estActive = '0';
 
     /**
      * @var string
@@ -97,29 +100,43 @@ class FSeedUser
      * @ORM\Column(name="MDP_SERVEUR", type="string", length=80, nullable=false, options={"fixed"=true})
      */
     private $mdpServeur;
+ 
 
-    public function getIdProfil(): ?int
+    public function getIdProfil(): ?string
     {
         return $this->idProfil;
     }
 
-    public function setIdProfil(int $idProfil): self
+    public function setIdProfil(string $idProfil): self
     {
         $this->idProfil = $idProfil;
 
         return $this;
     }
 
-    public function getLogin(): ?string
+    public function getUsername(): ?string
     {
         return $this->login;
     }
 
-    public function setLogin(string $login): self
+    public function setUsername(string $login): self
     {
         $this->login = $login;
 
         return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        //Attention, ne rien écrire dans cette fonction, ecrire dans getUsername (car getUsername est utilisé par UserInterface)
+        return $this->getUsername();
+        
+    }
+
+    public function setLogin(string $login): self
+    {
+        //Attention, ne rien écrire dans cette fonction, ecrire dans setUsername (car SetUsername est utilisé par UserInterface)
+        return $this->setUsername($login);
     }
 
     public function getNom(): ?string
@@ -148,13 +165,24 @@ class FSeedUser
 
     public function getMdp(): ?string
     {
-        return $this->mdp;
+        //Attention, ne rien écrire dans cette fonction, ecrire dans getPassword (car getPassword est utilisé par UserInterface)
+        return $this->getPassword();
     }
 
     public function setMdp(string $mdp): self
     {
-        $this->mdp = $mdp;
+        //Attention, ne rien écrire dans cette fonction, ecrire dans setPassword (car SetPassword est utilisé par UserInterface)
+        return $this->setPassword($mdp);
+    }
 
+    public function getPassword(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function setPassword(string $mdp): self
+    {
+        $this->mdp = $mdp;
         return $this;
     }
 
@@ -234,6 +262,27 @@ class FSeedUser
 
         return $this;
     }
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
 
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function setRoles()
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
 
 }

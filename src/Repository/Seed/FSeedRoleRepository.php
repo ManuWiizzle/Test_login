@@ -2,25 +2,25 @@
 
 namespace App\Repository\Seed;
 
-use App\Entity\Seed\FSeedClient;
+use App\Entity\Seed\FSeedRole;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method FSeedClient|null find($id, $lockMode = null, $lockVersion = null)
- * @method FSeedClient|null findOneBy(array $criteria, array $orderBy = null)
- * @method FSeedClient[]    findAll()
- * @method FSeedClient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method FSeedRole|null find($id, $lockMode = null, $lockVersion = null)
+ * @method FSeedRole|null findOneBy(array $criteria, array $orderBy = null)
+ * @method FSeedRole[]    findAll()
+ * @method FSeedRole[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FSeedClientRepository extends ServiceEntityRepository
+class FSeedRoleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, FSeedClient::class);
+        parent::__construct($registry, FSeedRole::class);
     }
 
     // /**
-    //  * @return FSeedClient[] Returns an array of FSeedClient objects
+    //  * @return FSeedRole[] Returns an array of FSeedRole objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class FSeedClientRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?FSeedClient
+    public function findOneBySomeField($value): ?FSeedRole
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')

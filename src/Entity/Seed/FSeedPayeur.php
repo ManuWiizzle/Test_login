@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FSeedPayeur
  *
  * @ORM\Table(name="f_seed_payeur", uniqueConstraints={@ORM\UniqueConstraint(name="NOM", columns={"NOM"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\Seed\FSeedPayeurRepository")
  */
 class FSeedPayeur
 {

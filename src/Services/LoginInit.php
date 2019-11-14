@@ -57,7 +57,7 @@ class LoginInit
       if ($payeur == null)
       {
         $payeur = new FSeedPayeur;
-        dd($payeur);
+        
         $payeur->setNom('VISUEL DEV');
         $payeur->setSiret("83897409500013");
         //Ajout du payeur en BDD
@@ -68,10 +68,13 @@ class LoginInit
 
     // On recherche un client qui à pour nom VISUEL DEV  
     $client = $this->FSeedClientRepository->findBy(['nom' => 'VISUEL DEV']);
+    
       if ($client == null)
       {
         $client = new FSeedClient;
-        $client->setIdPayeur($payeur->getIdPayeur()); 
+        
+        $client->setIdPayeur($payeur->getIdPayeur());
+         
         $client->setNom('VISUEL DEV');
         $client->setAlias('VDEV');
         $client->setSiret('8389740950001');
@@ -97,6 +100,7 @@ class LoginInit
   {
     // On recherche un client par l'alias
     $client = $this->FSeedClientRepository->findBy(['alias' => $alias]);
+    
     $message="";
    
     if($client == null)
@@ -107,6 +111,7 @@ class LoginInit
           if ($this->userIni() == null)
           {
             $message .= "Alias client incorrecte";
+            
             return false;
           } 
         }

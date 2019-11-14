@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FSeedRole
  *
  * @ORM\Table(name="f_seed_role", uniqueConstraints={@ORM\UniqueConstraint(name="NOM", columns={"NOM"})}, indexes={@ORM\Index(name="WDIDX_F_SEED_ROLE_ID_MODULE", columns={"ID_MODULE"}), @ORM\Index(name="WDIDX_F_SEED_ROLE_CLE_CLI_MOD_ROLE", columns={"ID_CLIENT", "ID_MODULE", "ID_ROLE"}), @ORM\Index(name="WDIDX_F_SEED_ROLE_CLE_CLI_NOM", columns={"ID_CLIENT", "NOM"}), @ORM\Index(name="WDIDX_F_SEED_ROLE_ID_CLIENT", columns={"ID_CLIENT"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\Seed\FSeedRoleRepository")
  */
 class FSeedRole
 {
