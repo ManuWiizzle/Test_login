@@ -23,7 +23,7 @@ class LoginController extends AbstractController
     {
         
        $userConnect = $loginInit->userConnexion("VDEV"); 
-       dd($userConnect);
+    //    dd($userConnect);
     
         
         //$user = new FSeedUser(); 

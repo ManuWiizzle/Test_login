@@ -45,6 +45,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getCredentials(Request $request)
     {
+        dd($request->request->all());
         $credentials = [
             'alias' => $request->request->get('alias'),
             'login' => $request->request->get('login'),
@@ -96,7 +97,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
 
           // redirect to some "app_homepage" route - of wherever you want
-        return new RedirectResponse($this->urlGenerator->generate('seed_f_seed_user_new'));
+        return new RedirectResponse($this->urlGenerator->generate('seed_f_seed_user_index'));
         
     }
 

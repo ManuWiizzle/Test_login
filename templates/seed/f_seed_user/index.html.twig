@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FSeedUser index{% endblock %}
+
+{% block body %}
+    <h1>FSeedUser index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdProfil</th>
+                <th>Login</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Mdp</th>
+                <th>EstAdmin</th>
+                <th>IdUser</th>
+                <th>Telephone</th>
+                <th>EstSuper</th>
+                <th>Email</th>
+                <th>EstActive</th>
+                <th>MdpServeur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for f_seed_user in f_seed_users %}
+            <tr>
+                <td>{{ f_seed_user.idProfil }}</td>
+                <td>{{ f_seed_user.login }}</td>
+                <td>{{ f_seed_user.nom }}</td>
+                <td>{{ f_seed_user.prenom }}</td>
+                <td>{{ f_seed_user.mdp }}</td>
+                <td>{{ f_seed_user.estAdmin ? 'Yes' : 'No' }}</td>
+                <td>{{ f_seed_user.idUser }}</td>
+                <td>{{ f_seed_user.telephone }}</td>
+                <td>{{ f_seed_user.estSuper ? 'Yes' : 'No' }}</td>
+                <td>{{ f_seed_user.email }}</td>
+                <td>{{ f_seed_user.estActive ? 'Yes' : 'No' }}</td>
+                <td>{{ f_seed_user.mdpServeur }}</td>
+                <td>
+                    <a href="{{ path('seed_f_seed_user_show', {'idUser': f_seed_user.idUser}) }}">show</a>
+                    <a href="{{ path('seed_f_seed_user_edit', {'idUser': f_seed_user.idUser}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('seed_f_seed_user_new') }}">Create new</a>
+{% endblock %}

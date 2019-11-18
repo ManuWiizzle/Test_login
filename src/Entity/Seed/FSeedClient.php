@@ -3,6 +3,7 @@
 namespace App\Entity\Seed;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * FSeedClient
