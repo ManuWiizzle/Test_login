@@ -2,6 +2,11 @@
 
 {% block title %}Connexion{% endblock %}
 
+{% for message in app.flashes('notice') %}
+    <div class="alert alert-notice">
+        {{ message }}
+    </div>
+
 {% block body %}
 <form method="post">
 
@@ -15,10 +20,7 @@
         </div>
     {% endif %}
 
-    {% for message in app.flashes('notice') %}
-    <div class="alert alert-notice">
-        {{ message }}
-    </div>
+    
     {% endfor %}
 
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
