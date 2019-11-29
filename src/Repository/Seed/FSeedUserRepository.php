@@ -22,19 +22,19 @@ class FSeedUserRepository extends ServiceEntityRepository
     // /**
     //  * @return FSeedUser[] Returns an array of FSeedUser objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findAlias(int $id)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('fsu')
+            ->join('fsu.idClient','c')
+            ->select('c.alias')
+            ->andWhere('fsu.idUser = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?FSeedUser

@@ -2,7 +2,12 @@
 
 namespace App\Entity\Seed;
 
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
@@ -18,9 +23,16 @@ class FSeedUser implements UserInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="ID_PROFIL", type="bigint", nullable=false)
+     * @ORM\Column(name="ID_PROFIL", type="integer", nullable=false)
      */
     private $idProfil = '0';
+
+    /**
+     * @var int|null
+     * @OneToOne(targetEntity="FSeedClient")
+     * @JoinColumn(name="ID_CLIENT", referencedColumnName="ID_CLIENT")
+     */
+    private $idClient;
 
     /**
      * @var string
@@ -44,9 +56,15 @@ class FSeedUser implements UserInterface
     private $prenom;
 
     /**
-     * @var string
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @var string The hashed password
      *
-     * @ORM\Column(name="MDP", type="string", length=80, nullable=false, options={"fixed"=true})
+     * @ORM\Column(name="MDP", type="string", nullable=false, options={"fixed"=true})
      */
     private $mdp;
 
@@ -114,6 +132,17 @@ class FSeedUser implements UserInterface
         return $this;
     }
 
+    public function getIdClient(): ?int
+    {
+        return $this->idClient;
+    }
+
+    public function setIdClient(?int $idClient): self
+    {
+        $this->idClient = $idClient;
+
+        return $this;
+    }
     public function getUsername(): ?string
     {
         return $this->login;
@@ -173,6 +202,16 @@ class FSeedUser implements UserInterface
     {
         //Attention, ne rien écrire dans cette fonction, ecrire dans setPassword (car SetPassword est utilisé par UserInterface)
         return $this->setPassword($mdp);
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($mdp)
+    {
+        $this->plainPassword = $mdp;
     }
 
     public function getPassword(): ?string
@@ -262,6 +301,9 @@ class FSeedUser implements UserInterface
 
         return $this;
     }
+    
+
+
     public function getSalt()
     {
         // you *may* need a real salt depending on your encoder

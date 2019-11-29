@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\Seed\FSeedClientRepository;
 use App\Repository\Seed\FSeedPayeurRepository;
 use App\Repository\Seed\FSeedProfilRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+
 
 
 class LoginInit
@@ -33,21 +34,21 @@ class LoginInit
     private $FSeedPayeurRepository;
     private $FSeedProfilRepository;
     protected $em;
-    private $session;
+    private $Bag;
 
     public function __construct(FSeedClientRepository $FSeedClientRepository,
                                 FSeedUserRepository $FSeedUserRepository,
                                 FSeedPayeurRepository $FSeedPayeurRepository,
                                 FSeedProfilRepository $FSeedProfilRepository,
                                 EntityManagerInterface $entityManager,
-                                SessionInterface $session)
+                                FlashBagInterface $flashBag)
     {
         $this->FSeedClientRepository = $FSeedClientRepository;
         $this->FSeedUserRepository = $FSeedUserRepository;
         $this->FSeedPayeurRepository = $FSeedPayeurRepository;
         $this->FSeedProfilRepository = $FSeedProfilRepository;
         $this->em = $entityManager;
-        $this->session = $session;
+        $this->Bag = $flashBag;
     }
 
 
@@ -59,9 +60,10 @@ class LoginInit
 
         if ($payeur == null) {
             $payeur = new FSeedPayeur;
-
+            
             $payeur->setNom('VISUEL DEV');
             $payeur->setSiret("83897409500013");
+            
             //Ajout du payeur en BDD
             $this->em->persist($payeur);
             $this->em->flush();
@@ -69,7 +71,7 @@ class LoginInit
 
         // On recherche un client qui à pour nom VISUEL DEV
         $client = $this->FSeedClientRepository->findBy(['nom' => 'VISUEL DEV']);
-
+        // dd($client);
         if ($client == null) {
             $payeur = $this->em->getRepository(FSeedPayeur::class)->find($payeur[0]->getIdPayeur());
             $client = new FSeedClient;
@@ -101,18 +103,17 @@ class LoginInit
         // On recherche un client par l'alias
         $client = $this->FSeedClientRepository->findBy(['alias' => $alias]);
 
-        $message = "";
         $available = true;
-        if ($client == null) {
+        if ($client) {
             if ($alias == "VDEV") {
                 // On utilise la fonction userIni()
                 if ($this->userIni() == null) {
-                    $this->session->addFlash('notice', 'Alias client incorrecte');
+                    $this->Bag->add('notice', 'Alias client incorrecte');
 
                     $available =  false;
                 }
             } else {
-                $this->session->addFlash('notice', 'Alias client incorrecte');
+                $this->Bag->add('notice', 'Alias client incorrecte');
 
                 $available = false;
             }

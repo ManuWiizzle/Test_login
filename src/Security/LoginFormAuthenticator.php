@@ -6,6 +6,7 @@ namespace App\Security;
 use App\Entity\Seed\FSeedUser;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,14 +27,21 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
-    
+    private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)
+
+
+    public function __construct(EntityManagerInterface $entityManager,
+                                UrlGeneratorInterface $urlGenerator,
+                                CsrfTokenManagerInterface $csrfTokenManager,
+                                UserPasswordEncoderInterface $passwordEncoder
+    )
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
-        
+        $this->passwordEncoder = $passwordEncoder;
+
     }
 
     public function supports(Request $request)
@@ -45,13 +53,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getCredentials(Request $request)
     {
-
         $credentials = [
             'alias' => $request->request->get('alias'),
             'login' => $request->request->get('login'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
+        //dd($credentials);
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['login']
@@ -62,30 +70,25 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        
-    
-
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-
         $user = $this->entityManager->getRepository(FSeedUser::class)->findOneBy(['login' => $credentials['login']]);
-        
+        // dd($user);
+        $alias = $this->entityManager->getRepository(FSeedUser::class)->findAlias($user->getIdUser());
+        // dd($alias);
         if (!$user) {
-            // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Le login est incorrect');
         }
-
+        if ($alias[0]['alias'] != $credentials['alias']) {
+            throw new CustomUserMessageAuthenticationException('Alias incorrecte');
+        }
         return $user;
     }
-
     public function checkCredentials($credentials, UserInterface $user)
     {
-        // Check the user's password or other credentials and return true or false
-        // If there are no credentials to check, you can just return true
-        //throw new \Exception('TODO: check the credentials inside '.__FILE__);
-        return true;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

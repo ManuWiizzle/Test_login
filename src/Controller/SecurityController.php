@@ -3,32 +3,21 @@
 namespace App\Controller;
 
 use App\Services\LoginInit;
-use App\Entity\Seed\FSeedUser;
-use App\Security\LoginFormAuthenticator;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
-class LoginController extends AbstractController
+class SecurityController extends AbstractController
 {
     /**
      * @Route("/", name="app_login")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils,LoginInit $loginInit): Response
+    public function login(AuthenticationUtils $authenticationUtils, LoginInit $loginInit): Response
     {
-        
-       $userConnect = $loginInit->userConnexion("VDEV"); 
+        $userConnect = $loginInit->userConnexion('VDEV');
     //    dd($userConnect);
-    
-        
-        //$user = new FSeedUser(); 
-        //$encoded = $encoder->encodePassword($user);
-        //$user->setPassword($encoded);   
+       
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
